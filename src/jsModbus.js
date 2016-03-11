@@ -67,14 +67,31 @@ exports.createTCPClient = function (port, host, unit_id, cb) {
 };
 
 
-exports.createTCPServer = function (port, host, cb) {
+exports.createTCPServer = function () {
 
-    var net             = require('net'),
-    tcpServerModule     = require('./tcpServer'),
-    serialServerModule  = require('./serialServer');
+    var net                 = require('net'),
+        tcpServerModule     = require('./tcpServer'),
+        serialServerModule  = require('./serialServer'),
+        port = 502, 
+        host, 
+        cb = function () { };
 
     tcpServerModule.setLogger(log);
     serialServerModule.setLogger(log);
+
+    if (arguments.length === 3) {
+        port = arguments[0];
+        host = arguments[1];
+        cb = arguments[2];
+    } else  if (arguments.length === 2) {
+        host = arguments[0];
+        cb = arguments[1];
+    } else if (arguments.length === 1) {
+        host = arguments[0];
+    } else {
+        throw new Error('No host defined.');
+    }
+
 
     var socket = net.createServer().listen(port, host);
 
