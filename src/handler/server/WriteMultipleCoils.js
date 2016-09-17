@@ -61,13 +61,13 @@ module.exports = stampit()
 
                     mem.writeUInt8(newValue, Math.floor(start / 8)); 
 
-                    j += 1;
-
                     if (j % 8 === 0) {
-                    
+                  
                         current = pdu.readUInt8(6 +  Math.floor(j / 8));
                     
                     }
+
+                    j += 1;
 
                 }
 
