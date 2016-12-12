@@ -145,7 +145,7 @@ module.exports = stampit()
 
             this.log.debug('Sending pdu to the socket.');
 
-            reqId += 1;
+            reqId = (reqId + 1) % 0xfff;
 
             var pkt = Put()
                 .word16be(reqId)                 // transaction id
