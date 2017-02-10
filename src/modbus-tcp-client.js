@@ -140,6 +140,7 @@ module.exports = stampit()
 
     var onTrashCurrentRequest = function () {
       trashRequestId = currentRequestId
+      this.emit('warning', {code: 'ENETTIMEDOUT', address: this.host, port: this.port})
     }
 
     this.connect = function () {
